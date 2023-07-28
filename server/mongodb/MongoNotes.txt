@@ -1,0 +1,24 @@
+
+<-----------------------------------------MODELS-------------------------------->
+1)we are creating a two way reference in out property and user schema where 1 user can have more than one property whereas a property can be owner by only a single user 
+
+In user.js 
+const UserSchema = new mongoose.Schema({
+    name:{type :String , required : true},
+    email:{type :String , required : true},
+    avatar:{type :String , required : true},
+    allProperties:[{type:mongoose.Schema.Types.ObjectId , ref: 'Property'}], //user 
+                                                                            can have more than one property
+})
+
+In property.js 
+const PropertySchema = new mongoose.Schema({
+    title:{type:string , required:true} ,
+    description:{type:string , required:true},
+    propertyType:{type:string , required:true},
+    location:{type:string , required:true},
+    price:{type:number , required:true},
+    photo:{type:string , required:true},
+    creator:{type:mongoose.Schema.Types.ObjectId , ref:'User'} //one propertybelong 
+                                                               to one user 
+})
